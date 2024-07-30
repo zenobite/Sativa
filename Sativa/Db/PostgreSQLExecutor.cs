@@ -1,20 +1,20 @@
-﻿using System;
+using System;
 using System.Data;
-using System.Data.Odbc;
+using Npgsql;
 
-namespace Sativa.Framework.OdbcDb
+namespace Sativa.Db.PostgreSQL
 {
     /// <summary>
-    /// Sativa Odbc Executor Class
+    /// Sativa PostgreSQL Executor Class
     /// </summary>
-    public class OdbcExecutor
+    public class PostgreSQLExecutor
     {
         public string ConnectionString;
-        OdbcConnection _connection;
-        OdbcCommand _command;
-        OdbcDataAdapter _dataAdapter;
+        NpgsqlConnection _connection;
+        NpgsqlCommand _command;
+        NpgsqlDataAdapter _dataAdapter;
 
-        public OdbcExecutor(string conString)
+        public PostgreSQLExecutor(string conString)
         {
             this.ConnectionString = conString;
         }
@@ -24,8 +24,8 @@ namespace Sativa.Framework.OdbcDb
             DataTable dt = new DataTable();
             try
             {
-                _connection = new OdbcConnection(this.ConnectionString);
-                _command = new OdbcCommand(sql);
+                _connection = new NpgsqlConnection(this.ConnectionString);
+                _command = new NpgsqlCommand(sql);
                 _command.Connection = _connection;
                 _connection.Open();
                 DataAdapter.SelectCommand = _command;
@@ -62,8 +62,8 @@ namespace Sativa.Framework.OdbcDb
         {
             try
             {
-                _connection = new OdbcConnection(this.ConnectionString);
-                _command = new OdbcCommand(sql);
+                _connection = new NpgsqlConnection(this.ConnectionString);
+                _command = new NpgsqlCommand(sql);
                 _command.Connection = _connection;
                 if (_connection.State == ConnectionState.Closed) _connection.Open();
 
@@ -79,12 +79,12 @@ namespace Sativa.Framework.OdbcDb
             }
         }
 
-        public OdbcDataReader ExecuteReader(string sql)
+        public NpgsqlDataReader ExecuteReader(string sql)
         {
             try
             {
-                _connection = new OdbcConnection(this.ConnectionString);
-                _command = new OdbcCommand(sql);
+                _connection = new NpgsqlConnection(this.ConnectionString);
+                _command = new NpgsqlCommand(sql);
                 _command.Connection = _connection;
                 _connection.Open();
 
@@ -138,7 +138,7 @@ namespace Sativa.Framework.OdbcDb
             }
         }
 
-        protected OdbcConnection Connection
+        protected NpgsqlConnection Connection
         {
             get
             {
@@ -147,7 +147,7 @@ namespace Sativa.Framework.OdbcDb
                     if (ConnectionString == "")
                         throw new Exception("Connection string must be defined before using connection, command or data adapter");
 
-                    _connection = new OdbcConnection(ConnectionString);
+                    _connection = new NpgsqlConnection(ConnectionString);
                     _connection.Open();
                 }
 
@@ -159,13 +159,13 @@ namespace Sativa.Framework.OdbcDb
             }
         }
 
-        internal OdbcCommand Command
+        internal NpgsqlCommand Command
         {
             get
             {
                 if (_command == null)
                 {
-                    _command = new OdbcCommand();
+                    _command = new NpgsqlCommand();
                     _command.Connection = Connection;
                 }
                 if (_command.Connection.ConnectionString == string.Empty)
@@ -181,13 +181,13 @@ namespace Sativa.Framework.OdbcDb
             }
         }
 
-        protected OdbcDataAdapter DataAdapter
+        protected NpgsqlDataAdapter DataAdapter
         {
             get
             {
                 if (_dataAdapter == null)
                 {
-                    _dataAdapter = new OdbcDataAdapter();
+                    _dataAdapter = new NpgsqlDataAdapter();
                 }
 
                 return _dataAdapter;
@@ -202,8 +202,8 @@ namespace Sativa.Framework.OdbcDb
         {
             try
             {
-                _connection = new OdbcConnection(this.ConnectionString);
-                _command = new OdbcCommand(sql);
+                _connection = new NpgsqlConnection(this.ConnectionString);
+                _command = new NpgsqlCommand(sql);
                 _command.Connection = _connection;
                 if (_connection.State == ConnectionState.Closed) _connection.Open();
 

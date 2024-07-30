@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sativa.Framework.Core
+namespace Sativa.Core
 {
     /// <summary>
     /// Sativa Db Field Key Class

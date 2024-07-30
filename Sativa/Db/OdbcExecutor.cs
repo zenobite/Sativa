@@ -1,20 +1,20 @@
-using System;
+﻿using System;
 using System.Data;
-using MySql.Data.MySqlClient;
+using System.Data.Odbc;
 
-namespace Sativa.Framework.MySQLDb
+namespace Sativa.Db.Odbc
 {
     /// <summary>
-    /// Sativa MySQL Executor Class
+    /// Sativa Odbc Executor Class
     /// </summary>
-    public class MySQLExecutor
+    public class OdbcExecutor
     {
         public string ConnectionString;
-        MySqlConnection _connection;
-        MySqlCommand _command;
-        MySqlDataAdapter _dataAdapter;
+        OdbcConnection _connection;
+        OdbcCommand _command;
+        OdbcDataAdapter _dataAdapter;
 
-        public MySQLExecutor(string conString)
+        public OdbcExecutor(string conString)
         {
             this.ConnectionString = conString;
         }
@@ -24,8 +24,8 @@ namespace Sativa.Framework.MySQLDb
             DataTable dt = new DataTable();
             try
             {
-                _connection = new MySqlConnection(this.ConnectionString);
-                _command = new MySqlCommand(sql);
+                _connection = new OdbcConnection(this.ConnectionString);
+                _command = new OdbcCommand(sql);
                 _command.Connection = _connection;
                 _connection.Open();
                 DataAdapter.SelectCommand = _command;
@@ -62,8 +62,8 @@ namespace Sativa.Framework.MySQLDb
         {
             try
             {
-                _connection = new MySqlConnection(this.ConnectionString);
-                _command = new MySqlCommand(sql);
+                _connection = new OdbcConnection(this.ConnectionString);
+                _command = new OdbcCommand(sql);
                 _command.Connection = _connection;
                 if (_connection.State == ConnectionState.Closed) _connection.Open();
 
@@ -79,12 +79,12 @@ namespace Sativa.Framework.MySQLDb
             }
         }
 
-        public MySqlDataReader ExecuteReader(string sql)
+        public OdbcDataReader ExecuteReader(string sql)
         {
             try
             {
-                _connection = new MySqlConnection(this.ConnectionString);
-                _command = new MySqlCommand(sql);
+                _connection = new OdbcConnection(this.ConnectionString);
+                _command = new OdbcCommand(sql);
                 _command.Connection = _connection;
                 _connection.Open();
 
@@ -138,7 +138,7 @@ namespace Sativa.Framework.MySQLDb
             }
         }
 
-        public MySqlConnection Connection
+        protected OdbcConnection Connection
         {
             get
             {
@@ -147,7 +147,7 @@ namespace Sativa.Framework.MySQLDb
                     if (ConnectionString == "")
                         throw new Exception("Connection string must be defined before using connection, command or data adapter");
 
-                    _connection = new MySqlConnection(ConnectionString);
+                    _connection = new OdbcConnection(ConnectionString);
                     _connection.Open();
                 }
 
@@ -159,13 +159,13 @@ namespace Sativa.Framework.MySQLDb
             }
         }
 
-        public MySqlCommand Command
+        internal OdbcCommand Command
         {
             get
             {
                 if (_command == null)
                 {
-                    _command = new MySqlCommand();
+                    _command = new OdbcCommand();
                     _command.Connection = Connection;
                 }
                 if (_command.Connection.ConnectionString == string.Empty)
@@ -181,13 +181,13 @@ namespace Sativa.Framework.MySQLDb
             }
         }
 
-        protected MySqlDataAdapter DataAdapter
+        protected OdbcDataAdapter DataAdapter
         {
             get
             {
                 if (_dataAdapter == null)
                 {
-                    _dataAdapter = new MySqlDataAdapter();
+                    _dataAdapter = new OdbcDataAdapter();
                 }
 
                 return _dataAdapter;
@@ -202,8 +202,8 @@ namespace Sativa.Framework.MySQLDb
         {
             try
             {
-                _connection = new MySqlConnection(this.ConnectionString);
-                _command = new MySqlCommand(sql);
+                _connection = new OdbcConnection(this.ConnectionString);
+                _command = new OdbcCommand(sql);
                 _command.Connection = _connection;
                 if (_connection.State == ConnectionState.Closed) _connection.Open();
 

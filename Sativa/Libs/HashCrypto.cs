@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace Sativa.Framework.Libs
+namespace Sativa.Libs
 {
     /// <summary>
     /// Hash Crypto Data Library Class

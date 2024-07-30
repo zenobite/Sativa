@@ -1,20 +1,20 @@
 using System;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
-namespace Sativa.Framework.SqlServerDb
+namespace Sativa.Db.MySQL
 {
     /// <summary>
-    /// Sativa SQL Server Executor Class
+    /// Sativa MySQL Executor Class
     /// </summary>
-    public class SqlServerExecutor
+    public class MySQLExecutor
     {
         public string ConnectionString;
-        SqlConnection _connection;
-        SqlCommand _command;
-        SqlDataAdapter _dataAdapter;
+        MySqlConnection _connection;
+        MySqlCommand _command;
+        MySqlDataAdapter _dataAdapter;
 
-        public SqlServerExecutor(string conString)
+        public MySQLExecutor(string conString)
         {
             this.ConnectionString = conString;
         }
@@ -24,8 +24,8 @@ namespace Sativa.Framework.SqlServerDb
             DataTable dt = new DataTable();
             try
             {
-                _connection = new SqlConnection(this.ConnectionString);
-                _command = new SqlCommand(sql);
+                _connection = new MySqlConnection(this.ConnectionString);
+                _command = new MySqlCommand(sql);
                 _command.Connection = _connection;
                 _connection.Open();
                 DataAdapter.SelectCommand = _command;
@@ -62,8 +62,8 @@ namespace Sativa.Framework.SqlServerDb
         {
             try
             {
-                _connection = new SqlConnection(this.ConnectionString);
-                _command = new SqlCommand(sql);
+                _connection = new MySqlConnection(this.ConnectionString);
+                _command = new MySqlCommand(sql);
                 _command.Connection = _connection;
                 if (_connection.State == ConnectionState.Closed) _connection.Open();
 
@@ -79,12 +79,12 @@ namespace Sativa.Framework.SqlServerDb
             }
         }
 
-        public SqlDataReader ExecuteReader(string sql)
+        public MySqlDataReader ExecuteReader(string sql)
         {
             try
             {
-                _connection = new SqlConnection(this.ConnectionString);
-                _command = new SqlCommand(sql);
+                _connection = new MySqlConnection(this.ConnectionString);
+                _command = new MySqlCommand(sql);
                 _command.Connection = _connection;
                 _connection.Open();
 
@@ -138,7 +138,7 @@ namespace Sativa.Framework.SqlServerDb
             }
         }
 
-        public SqlConnection Connection
+        public MySqlConnection Connection
         {
             get
             {
@@ -147,7 +147,7 @@ namespace Sativa.Framework.SqlServerDb
                     if (ConnectionString == "")
                         throw new Exception("Connection string must be defined before using connection, command or data adapter");
 
-                    _connection = new SqlConnection(ConnectionString);
+                    _connection = new MySqlConnection(ConnectionString);
                     _connection.Open();
                 }
 
@@ -159,13 +159,13 @@ namespace Sativa.Framework.SqlServerDb
             }
         }
 
-        public SqlCommand Command
+        public MySqlCommand Command
         {
             get
             {
                 if (_command == null)
                 {
-                    _command = new SqlCommand();
+                    _command = new MySqlCommand();
                     _command.Connection = Connection;
                 }
                 if (_command.Connection.ConnectionString == string.Empty)
@@ -181,13 +181,13 @@ namespace Sativa.Framework.SqlServerDb
             }
         }
 
-        protected SqlDataAdapter DataAdapter
+        protected MySqlDataAdapter DataAdapter
         {
             get
             {
                 if (_dataAdapter == null)
                 {
-                    _dataAdapter = new SqlDataAdapter();
+                    _dataAdapter = new MySqlDataAdapter();
                 }
 
                 return _dataAdapter;
@@ -202,8 +202,8 @@ namespace Sativa.Framework.SqlServerDb
         {
             try
             {
-                _connection = new SqlConnection(this.ConnectionString);
-                _command = new SqlCommand(sql);
+                _connection = new MySqlConnection(this.ConnectionString);
+                _command = new MySqlCommand(sql);
                 _command.Connection = _connection;
                 if (_connection.State == ConnectionState.Closed) _connection.Open();
 

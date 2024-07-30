@@ -2,7 +2,7 @@ using System;
 using System.Net.Mail;
 using System.Threading;
 
-namespace Sativa.Framework.Libs
+namespace Sativa.Libs
 {
     /// <summary>
     /// Email Library Class

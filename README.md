@@ -1,5 +1,5 @@
-![GitHub Logo](/sativaframework.png)
-# Sativa Framework
+![GitHub Logo](/logo.png)
+# Sativa
 A revolutionary database framework on .NET technology
 
 > Supported DBMS

@@ -1,7 +1,7 @@
 using System;
 using System.Data;
 
-namespace Sativa.Framework.Core
+namespace Sativa.Core
 {
     /// <summary>
     /// Sativa Base Class

@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.Collections;
 
-namespace Sativa.Framework.Core
+namespace Sativa.Core
 {
     /// <summary>
     /// Sativa Collection Base Class

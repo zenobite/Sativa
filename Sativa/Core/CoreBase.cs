@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Collections;
 using System.Globalization;
 
-namespace Sativa.Framework.Core
+namespace Sativa.Core
 {
     /// <summary>
     /// Sativa Core Base Class

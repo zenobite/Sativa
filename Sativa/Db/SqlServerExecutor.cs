@@ -1,20 +1,20 @@
 using System;
 using System.Data;
-using Npgsql;
+using System.Data.SqlClient;
 
-namespace Sativa.Framework.PostgreSQLDb
+namespace Sativa.Db.SqlServer
 {
     /// <summary>
-    /// Sativa PostgreSQL Executor Class
+    /// Sativa SQL Server Executor Class
     /// </summary>
-    public class PostgreSQLExecutor
+    public class SqlServerExecutor
     {
         public string ConnectionString;
-        NpgsqlConnection _connection;
-        NpgsqlCommand _command;
-        NpgsqlDataAdapter _dataAdapter;
+        SqlConnection _connection;
+        SqlCommand _command;
+        SqlDataAdapter _dataAdapter;
 
-        public PostgreSQLExecutor(string conString)
+        public SqlServerExecutor(string conString)
         {
             this.ConnectionString = conString;
         }
@@ -24,8 +24,8 @@ namespace Sativa.Framework.PostgreSQLDb
             DataTable dt = new DataTable();
             try
             {
-                _connection = new NpgsqlConnection(this.ConnectionString);
-                _command = new NpgsqlCommand(sql);
+                _connection = new SqlConnection(this.ConnectionString);
+                _command = new SqlCommand(sql);
                 _command.Connection = _connection;
                 _connection.Open();
                 DataAdapter.SelectCommand = _command;
@@ -62,8 +62,8 @@ namespace Sativa.Framework.PostgreSQLDb
         {
             try
             {
-                _connection = new NpgsqlConnection(this.ConnectionString);
-                _command = new NpgsqlCommand(sql);
+                _connection = new SqlConnection(this.ConnectionString);
+                _command = new SqlCommand(sql);
                 _command.Connection = _connection;
                 if (_connection.State == ConnectionState.Closed) _connection.Open();
 
@@ -79,12 +79,12 @@ namespace Sativa.Framework.PostgreSQLDb
             }
         }
 
-        public NpgsqlDataReader ExecuteReader(string sql)
+        public SqlDataReader ExecuteReader(string sql)
         {
             try
             {
-                _connection = new NpgsqlConnection(this.ConnectionString);
-                _command = new NpgsqlCommand(sql);
+                _connection = new SqlConnection(this.ConnectionString);
+                _command = new SqlCommand(sql);
                 _command.Connection = _connection;
                 _connection.Open();
 
@@ -138,7 +138,7 @@ namespace Sativa.Framework.PostgreSQLDb
             }
         }
 
-        protected NpgsqlConnection Connection
+        public SqlConnection Connection
         {
             get
             {
@@ -147,7 +147,7 @@ namespace Sativa.Framework.PostgreSQLDb
                     if (ConnectionString == "")
                         throw new Exception("Connection string must be defined before using connection, command or data adapter");
 
-                    _connection = new NpgsqlConnection(ConnectionString);
+                    _connection = new SqlConnection(ConnectionString);
                     _connection.Open();
                 }
 
@@ -159,13 +159,13 @@ namespace Sativa.Framework.PostgreSQLDb
             }
         }
 
-        internal NpgsqlCommand Command
+        public SqlCommand Command
         {
             get
             {
                 if (_command == null)
                 {
-                    _command = new NpgsqlCommand();
+                    _command = new SqlCommand();
                     _command.Connection = Connection;
                 }
                 if (_command.Connection.ConnectionString == string.Empty)
@@ -181,13 +181,13 @@ namespace Sativa.Framework.PostgreSQLDb
             }
         }
 
-        protected NpgsqlDataAdapter DataAdapter
+        protected SqlDataAdapter DataAdapter
         {
             get
             {
                 if (_dataAdapter == null)
                 {
-                    _dataAdapter = new NpgsqlDataAdapter();
+                    _dataAdapter = new SqlDataAdapter();
                 }
 
                 return _dataAdapter;
@@ -202,8 +202,8 @@ namespace Sativa.Framework.PostgreSQLDb
         {
             try
             {
-                _connection = new NpgsqlConnection(this.ConnectionString);
-                _command = new NpgsqlCommand(sql);
+                _connection = new SqlConnection(this.ConnectionString);
+                _command = new SqlCommand(sql);
                 _command.Connection = _connection;
                 if (_connection.State == ConnectionState.Closed) _connection.Open();
 
