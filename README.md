@@ -1,4 +1,4 @@
-![GitHub Logo](/logo.png)
+![GitHub Logo](/icon.png)
 # Sativa
 A revolutionary database framework on .NET technology
 

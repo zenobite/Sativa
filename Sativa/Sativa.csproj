@@ -2,12 +2,29 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <PackageId>Sativa</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Owner>Zenobite</Owner>
+    <Authors>Zenobite</Authors>
+    <Description>A revolutionary database framework on .NET technology</Description>
+    <Copyright>Copyright©Zenobite-2024</Copyright>
+    <PackageProjectUrl>https://github.com/zenobite</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/zenobite/Sativa</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Sativa v1.0.0</PackageTags>
+    <PackageReleaseNotes>Full Changelog: https://github.com/zenobite/Sativa/commits/v1.0.0</PackageReleaseNotes>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);SYSLIB0021</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="../LICENSE" Pack="true" PackagePath=""/>
+    <None Include="../icon.png" Pack="true" PackagePath=""/>
+    <None Include="../README.md" Pack="true" PackagePath=""/>
     <PackageReference Include="Mysql.Data" Version="9.0.0" />
     <PackageReference Include="Npgsql" Version="8.0.3" />
     <PackageReference Include="System.Data.Odbc" Version="8.0.0" />
